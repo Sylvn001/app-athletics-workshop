@@ -11,8 +11,14 @@ export class ProductsService {
     return this.productsRepository.create(createProductDto);
   }
 
-  findAll() {
-    return this.productsRepository.findAll();
+  findAll(skip, take, search, _orderBy, _order) {
+    return this.productsRepository.findAll(
+      skip,
+      take,
+      search,
+      _orderBy,
+      _order,
+    );
   }
 
   findOne(id: number) {

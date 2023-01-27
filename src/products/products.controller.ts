@@ -10,6 +10,8 @@ import {
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
+import { Query } from '@nestjs/common/decorators';
+import { skip, take } from 'rxjs';
 
 @Controller('products')
 export class ProductsController {
@@ -20,9 +22,16 @@ export class ProductsController {
     return this.productsService.create(createProductDto);
   }
 
+  //localhost:3000/products?skip=0
   @Get()
-  findAll() {
-    return this.productsService.findAll();
+  findAll(
+    @Query('skip') skip = 0,
+    @Query('take') take = 10,
+    @Query('search') search,
+    @Query('orderBy') _orderBy = 'name', // field
+    @Query('order') _order = 'asc',
+  ) {
+    return this.productsService.findAll(+skip, +take, search, _orderBy, _order);
   }
 
   @Get(':id')

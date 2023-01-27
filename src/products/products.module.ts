@@ -1,4 +1,3 @@
-import { PrismaModule } from './../prisma/prisma.module';
 import { ProductsRepository } from './repositories/products.repository';
 import { Module } from '@nestjs/common';
 import { ProductsService } from './products.service';
